@@ -14,7 +14,6 @@ if [ -f /etc/sysconfig/tomcat ]; then
         . /etc/sysconfig/tomcat
 fi
 
-
 # Set HTTPD=/usr/sbin/httpd.worker in /etc/sysconfig/httpd to use a server
 # with the thread-based "worker" MPM; BE WARNED that some modules may not
 # work correctly with a thread-based MPM; notably PHP will refuse to start.
