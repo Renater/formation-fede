@@ -18,7 +18,6 @@ fi
 # with the thread-based "worker" MPM; BE WARNED that some modules may not
 # work correctly with a thread-based MPM; notably PHP will refuse to start.
 
-
 JAVA_HOME=/usr
 export JAVA_HOME
 CATALINA_HOME=/opt/tomcat
