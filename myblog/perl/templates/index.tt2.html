@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8" ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="[% iso639 = locale.match('^(.)(.)'); iso639.0; iso639.1 %]" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<STYLE type="text/css"><!--
+.erreur { color : red }
+.login {float: left}
+.menu {float: right}
+.footer {text-align: center}
+h1 {text-align: center}
+.billet {border: 1px coral solid; padding: 5px; background-color: lightgrey; margin: 5px }
+.contenu {background-color: coral; border: 1px black solid;}
+--></STYLE>
+<title> monBlob - [% titre %] </title>
+</head>
+
+<body>
+<div class="login">
+[% IF utilisateur %]Logged in as <strong>[% utilisateur %]</strong><br/>[% END %]
+[% IF role_utilisateur %]Role : [% role_utilisateur %]<br/>[% END %]
+</div>
+
+<div class="menu">
+<a href="[% chemin_cgi %]?action=index">liste des billets</a> | 
+[% IF utilisateur %]<a href="[% chemin_cgi %]?action=ecrire">écrire un billet</a>[% ELSE %]écrire un billet[% END %] | 
+[% IF utilisateur %]<a href="[% chemin_cgi %]?action=logout">logout</a>[% ELSE %]<a href="[% chemin_cgi %]?action=login">login</a>[% END %]
+</div>
+
+
+<h1>[% titre %]</h1>
+
+[% IF erreurs %]
+<div class="erreur">
+[% FOREACH err IN erreurs %]
+[% err %]<br/>
+[% END %]
+</div>
+[% END %]
+<div>
+
+[% IF action == 'index' %]
+[% FOREACH billet IN liste_billets %]
+<div class="billet">
+  [% billet.titre %]<br/>
+  [% billet.date_affichable %] - [% IF billet.auteur %][% billet.auteur %][% ELSE %]anonyme[% END %]<br/>
+ <div class="contenu">
+[% billet.contenu %]
+</div>
+<a href="[% chemin_cgi %]?action=lire&id=[% billet.id %]">lire ce billet</a>[% IF role_utilisateur == 'admin' || utilisateur == billet.auteur%] - <a href="[% chemin_cgi %]?action=effacer&id=[% billet.id %]">effacer ce billet</a>[% END %]<br/>
+</div>
+[% END %]
+
+[% ELSIF action == 'lire' %]
+<div>Auteur : [% billet.auteur %]</div>
+<div>Date : [% billet.date_affichable %]</div>
+<div class="contenu">[% billet.contenu %]</div>
+
+[% ELSIF action == 'ecrire' %]
+<div>
+<form action="[% chemin_cgi %]" method="post">
+<fieldset>
+  <label for="titre">Titre : </label>
+  <input type="text" id="titre" name="titre" size="60"/><br />
+
+  <textarea id="contenu" name="contenu" cols="90" rows="25"></textarea>
+<br/>
+
+  <input type="hidden" name="action" value="ecrire">
+  <input type="submit" name="intitule_bouton" value="Ajouter ce billet" />
+</fieldset>
+</form>
+</div>
+
+[% ELSIF action == 'login' %]
+<div>
+<form action="[% chemin_cgi %]" method="post">
+<fieldset>
+  <label for="identifiant">Identifiant : </label>
+  <input type="text" id="identifiant" name="identifiant" size="20"/><br />
+
+  <label for="mot_de_passe">Mot de passe : </label>
+  <input type="password" id="mot_de_passe" name="mot_de_passe" size="20"/><br />
+<br/>
+
+  <input type="hidden" name="action" value="login">
+  <input type="submit" name="intitule_bouton" value="Login" />
+</fieldset>
+</form>
+</div>
+[% END %]
+</div>
+
+<div class="footer">powered by myBlog</div>
+
+</body>
+</html>
