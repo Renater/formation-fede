@@ -24,7 +24,7 @@ CATALINA_HOME=/opt/tomcat
 export CATALINA_HOME
 
 # Keystore & allocating a minimum memory size
-JAVA_OPTS="-Xmx2000m -Didp.home=/opt/shibboleth-idp"
+JAVA_OPTS="-XX:+UseG1GC -Xmx2000m -Didp.home=/opt/shibboleth-idp"
 export JAVA_OPTS
 
 prog=tomcat
