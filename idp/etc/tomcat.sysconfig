@@ -3,3 +3,4 @@ CATALINA_HOME=/opt/tomcat
 CATALINA_BASE=/opt/tomcat
 CATALINA_PID=/opt/tomcat/temp/tomcat.pid
 CATALINA_OPTS=""
+UMASK=0022
