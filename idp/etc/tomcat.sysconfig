@@ -1,4 +1,4 @@
 JAVA_HOME=/usr
 CATALINA_HOME=/opt/tomcat
 CATALINA_BASE=/opt/tomcat
-CATALINA_OPTS="-XX:+UseG1GC -Xmx2000m -Didp.home=/opt/shibboleth-idp"
+CATALINA_OPTS=""
