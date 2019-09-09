@@ -1,4 +1,5 @@
 JAVA_HOME=/usr
 CATALINA_HOME=/opt/tomcat
 CATALINA_BASE=/opt/tomcat
+CATALINA_PID=/opt/tomcat/temp/tomcat.pid
 CATALINA_OPTS=""
